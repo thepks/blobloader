@@ -1,4 +1,4 @@
-import { BlockBlobClient, Pipeline, BlobServiceClient, newPipeline, AnonymousCredential } from "@azure/storage-blob";
+import { BlockBlobClient, newPipeline, AnonymousCredential } from "@azure/storage-blob";
 
 
 

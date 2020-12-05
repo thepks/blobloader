@@ -1,55 +1,9 @@
-import React, { useState, useEffect, Component } from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+
 import './App.css';
 import Body from './components/body';
 
 import Auth from './services/auth';
-
-
-// function App(props) {
-
-//   let retry = 0;
-//   let auth;
- 
-//   const [loggedIn, setLoggedIn] = useState(false);
-
-//   useEffect(() => {
-//      auth = new Auth(props.authProvider, props.api, setLoggedInState);
-//   },[]);
-
-// function setLoggedInState(val) {
-//   console.log('Logging in: ' + val);
-//   retry = 0;
-//   testLoggedIn();
-// }
-
-// function testLoggedIn() {
-//   auth.isLoggedIn()
-//     .then((res) => {
-//       if (res) {
-//         setLoggedIn(true);
-//       } else {
-//         retry++;
-//         if ( retry <= 10 ) {
-//         console.log('Login is delayed, retry in 1s');
-//         setTimeout(testLoggedIn, 1000);
-//         }
-//       }
-//   });
-// }
-
-
-//   return (
-//     <div className="App">
-//       <Body auth={auth} loggedIn={loggedIn}/>
-//     </div>
-//   );
-// }
-
-// export default App;
-
-
-
 
 
 class App extends Component {
@@ -67,7 +21,6 @@ class App extends Component {
     this.retry = 0;
     this.setLoggedIn = this.setLoggedIn.bind(this);
 
-    //this.api.login();
 
     this.testLoggedIn = this.testLoggedIn.bind(this);
 
@@ -104,10 +57,6 @@ class App extends Component {
   }
 
  
- 
-
-
-
 
   render() {
     return (

@@ -1,14 +1,7 @@
 import env from "@beam-australia/react-env";
-//const msal = require('msal');
-//import msal from '@azure/msal-browser';
-import * as msal from "@azure/msal-browser";
+
 
 const SERVERNAME = env("SERVERNAME");
-
-
-
-
-
 
 const loginRequest = {
 
@@ -211,7 +204,7 @@ class Auth {
   }
 
   async getAppServiceToken(token) {
-    var that = this;
+
     var body = { access_token: token };
     console.log(body);
 

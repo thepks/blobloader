@@ -14,8 +14,6 @@ const tenant = env("TENANT");
 const client_id = env("CLIENT_ID");
 const target_client = env("TARGET_CLIENT_ID");
 const CLIENTNAME = env("CLIENTNAME");  //https://gpnotes.azureedge.net/
-const SERVERNAME = env("SERVERNAME");
-const ISSUER = env("AUTHORITY");
 const BLOBAPI = env("BLOBAPI");
 
 
@@ -54,6 +52,9 @@ const config = {
             return;
           case msal.LogLevel.Warning:
             console.warn(message);
+            return;
+          default:
+            console.info(message);
             return;
         }
       }, level: msal.LogLevel.Verbose,
