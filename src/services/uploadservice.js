@@ -1,13 +1,8 @@
-
+import { BlockBlobClient, Pipeline, BlobServiceClient, newPipeline, AnonymousCredential } from "@azure/storage-blob";
 
 
 
 export default async function UploadService(auth, filedata, name) {
-
-
-    const uploadData = new FormData();
-
-    uploadData.append('file', filedata);
 
 
     var loggedIn = await auth.isLoggedIn();
@@ -25,34 +20,33 @@ export default async function UploadService(auth, filedata, name) {
             fetch('https://gpblobloader.azurewebsites.net/api/HttpTrigger1?code=dfC14fs1bWe3Ltg1IRCWhMIktpBM7jPJf8brTpKAGBQGBsf33fvgBQ==&blob=' + name, {
                 method: 'GET',
                 headers: {
-                'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + token
                 },
                 mode: 'cors',
-//                credentials: 'include',
+                //                credentials: 'include',
                 redirect: 'follow'
             })
-                .then((resp) => 
+                .then((resp) =>
                     resp.json())
-                .then ((data) => {
+                .then((data) => {
 
                     console.log('uri: ', data);
 
-                    fetch(data.uri, {
-                        method: 'PUT',
-                        headers: {
-                            'x-ms-blob-type': 'BlockBlob'
-                        },
-                        body: uploadData,
-                        mode: 'cors',
-                        credentials: 'include',
-                        redirect: 'follow'
-                    })
-                        .then((resp) => {
 
-                            console.log(resp.status);
-                            resolve(resp.status);
+                    const pipeline = newPipeline(new AnonymousCredential());
+                    
+                    var blockBlobClient = new BlockBlobClient(data.uri, pipeline);
+                    blockBlobClient.uploadData(filedata, {
+                        maxSingleShotSize: 4 * 1024 * 1024
+                      })
+                        .then((resp) => {
+                            console.log(resp);
+                            resolve(resp._response.status);
 
                         });
+
+
+
 
                 });
 
